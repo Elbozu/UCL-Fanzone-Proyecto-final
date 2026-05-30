@@ -1227,4 +1227,29 @@ footer {
   .modal-content {
     padding: 30px 20px;
   }
+   
+  /*Desde aqui abajo son reglas que solo aplican en la version movil */
+  
+  .quiz-container .quiz-badge {
+    left: 0;
+    right: 0;
+    transform: none;
+    text-align: center;
+    width: fit-content;
+    margin: 0 auto;
+  }
+  .registrations-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .registrations-title {
+    font-size: 1.5rem;
+  }
+  .section-title::after {
+    left: 37%;
+  }
+   
 }

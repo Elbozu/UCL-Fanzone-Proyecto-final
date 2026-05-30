@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Descubre el universo de la UEFA Champions League. Explora los clubes históricos, demuestra tus conocimientos en nuestra trivia interactiva y únete a la comunidad de aficionados.">
+  <title>UCL - Fanzone Oficial</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-size=%2290%22>⚽</text></svg>">
+</head>
+<body>
+
+  <!-- ENCABEZADO Y NAVEGACIÓN -->
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo-link" id="home-logo">
+        <img src="images/logo.svg" alt="Logotipo de UCL Fanzone" class="logo-img">
+        <span class="logo-text">UCL <span>Fanzone</span></span>
+      </a>
+      
+      <nav aria-label="Navegación Principal">
+        <div class="nav-toggle" id="menu-toggle" aria-expanded="false" aria-label="Abrir menu de navegacion">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link active">Inicio</a></li>
+          <li><a href="equipos.html" class="nav-link">Equipos</a></li>
+          <li><a href="registro.html" class="nav-link">Registro Fans</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    
+    <!-- SECCION PRINCIPAL -->
+    <section class="principal" id="principal-inicio">
+      <div class="principal-overlay"></div>
+      <div class="principal-contenido">
+        <span class="principal-lema">La competicion de clubes mas prestigiosa</span>
+        <h1 class="principal-titulo">Noches de Gloria Europea</h1>
+        <p class="principal-descripcion">Siente la pasión del mejor futbol del planeta. Conoce la historia de las estrellas, revive los grandes momentos y demuestra tus conocimientos.</p>
+        <div class="principal-botones">
+          <a href="equipos.html" class="btn btn-primary">Ver Campeones</a>
+          <a href="#trivia-section" class="btn btn-outline">Probar Trivia</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCION DE INFORMACION DEL TORNEO -->
+    <section class="info-section">
+      <div class="container">
+        <h2 class="section-title">El Formato Estelar</h2>
+        
+        <div class="card-grid">
+          <div class="glass-card">
+            <div class="card-icon">🏆</div>
+            <h3 class="card-title">La Orejona</h3>
+            <p class="card-text">El trofeo de la Copa de Clubes Campeones Europeos, coloquialmente conocido como 'La Orejona' por sus grandes asas metalicas, es el galardon mas codiciado del continente.</p>
+          </div>
+          
+          <div class="glass-card">
+            <div class="card-icon">🎶</div>
+            <h3 class="card-title">El Himno</h3>
+            <p class="card-text">Compuesto por Tony Britten en 1992 basandose en Zadok the Priest de Händel. Un himno sagrado que eriza la piel de jugadores e hinchas segundos antes de rodar el balon.</p>
+          </div>
+          
+          <div class="glass-card">
+            <div class="card-icon">🌟</div>
+            <h3 class="card-title">Las Estrellas</h3>
+            <p class="card-text">Representadas en el iconico balon 'Starball'. Simbolizan la excelencia técnica, los partidos jugados en la penumbra del anochecer y los mayores talentos del futbol mundial.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCION INTERACTIVA DE TRIVIA -->
+    <section id="trivia-section" style="background: rgba(11, 21, 53, 0.1); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <h2 class="section-title">Trivia de la Champions</h2>
+        
+        <div class="quiz-container" id="quiz-wrapper">
+          <!-- Contenido generado dinamicamente con JS -->
+          <span class="quiz-badge">Trivia Express</span>
+          <h3 class="quiz-question" id="quiz-question">Cargando pregunta...</h3>
+          <div class="quiz-options" id="quiz-options">
+            <!-- Las opciones se añaden dinamicamente -->
+          </div>
+          <div class="quiz-score-area">
+            <p class="quiz-score" id="quiz-score-text">Pregunta: - | Puntos: 0</p>
+            <button id="quiz-next-btn" class="quiz-btn-next">Siguiente</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PAGINA -->
+  <footer>
+    <div class="container">
+      <div class="footer-layout">
+        <div class="footer-brand">
+          <div class="footer-logo">UCL <span>Fanzone</span></div>
+          <p class="footer-desc">Una plataforma interactiva independiente diseñada para aficionados del mejor futbol de Europa. Todos los derechos del logo oficial pertenecen a la UEFA.</p>
+        </div>
+        
+        <nav class="footer-nav" aria-label="Navegacion del Pie de Pagina">
+          <div class="footer-nav-col">
+            <h4>Navegación</h4>
+            <ul>
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="equipos.html">Equipos Historicos</a></li>
+              <li><a href="registro.html">Unirse al Club</a></li>
+            </ul>
+          </div>
+          <div class="footer-nav-col">
+            <h4>Enlaces de Interes</h4>
+            <ul>
+              <li><a href="https://es.uefa.com/uefachampionsleague/" target="_blank" rel="noopener">Sitio Oficial UEFA</a></li>
+              <li><a href="https://gaming.uefa.com/es/uclfantasy" target="_blank" rel="noopener">UCL Fantasy</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2026 UCL Fanzone. Desarrollado con pasion futbolistica en HTML5/CSS/JS, Por Sandy Jr Perez Mendoza.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-link" aria-label="Twitter de UCL Fanzone">🐦</a>
+          <a href="#" class="social-link" aria-label="Instagram de UCL Fanzone">📸</a>
+          <a href="#" class="social-link" aria-label="YouTube de UCL Fanzone">📺</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

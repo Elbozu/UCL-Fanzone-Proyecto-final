@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Inscribete en el club oficial de fans de la UEFA Champions League. Completa el formulario de registro y descarga el registro de aficionados en formato JSON.">
+  <title>Registro del Club de Fans - UEFA Champions League</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-size=%2290%22>⚽</text></svg>">
+</head>
+<body>
+
+  <!-- ENCABEZADO Y NAVEGACION -->
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo-link">
+        <img src="images/logo.svg" alt="Logotipo de UCL Fanzone" class="logo-img">
+        <span class="logo-text">UCL <span>Fanzone</span></span>
+      </a>
+      
+      <nav aria-label="Navegacion Principal">
+        <div class="nav-toggle" id="menu-toggle" aria-expanded="false" aria-label="Abrir menu de navegacion">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+          <li><a href="equipos.html" class="nav-link">Equipos</a></li>
+          <li><a href="registro.html" class="nav-link active">Registro Fans</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    
+    <section>
+      <div class="container">
+        <h1 class="section-title">Unete al Club de Fans</h1>
+        
+        <div class="contact-layout">
+          <!-- CONTENEDOR DEL FORMULARIO -->
+          <div class="form-card">
+            <h2 style="font-family: var(--font-heading); margin-bottom: 20px; font-size: 1.5rem;">Formulario de Registro</h2>
+            
+            <form id="formulario-registro" novalidate>
+              <!-- Campo 1: Nombre Completo -->
+              <div class="form-group">
+                <label for="fan-name" class="form-label">Nombre Completo</label>
+                <input type="text" id="fan-name" class="form-input" placeholder="Ej. Sandy Perez" required>
+                <span class="validation-msg" id="name-validation">El nombre debe tener al menos 3 caracteres.</span>
+              </div>
+              
+              <!-- Campo 2: Correo -->
+              <div class="form-group">
+                <label for="fan-email" class="form-label">Correo Electronico</label>
+                <input type="email" id="fan-email" class="form-input" placeholder="correo@ejemplo.com" required>
+                <span class="validation-msg" id="email-validation">Introduce un correo electrónico valido.</span>
+              </div>
+              
+              <!-- Campo 3: Club Favorito -->
+              <div class="form-group">
+                <label for="fan-club" class="form-label">Club Favorito</label>
+                <select id="fan-club" class="form-input" style="color: var(--text-muted);" onchange="this.style.color = this.value === '' ? 'var(--text-muted)' : 'var(--text-main)'" required>
+                  <option value="" disabled selected>Selecciona tu equipo...</option>
+                  <option value="real-madrid">Real Madrid CF</option>
+                  <option value="ac-milan">AC Milan</option>
+                  <option value="bayern-munich">FC Bayern München</option>
+                  <option value="liverpool">Liverpool FC</option>
+                  <option value="barcelona">FC Barcelona</option>
+                  <option value="ajax">AFC Ajax</option>
+                  <option value="manchester-city">Manchester City FC</option>
+                  <option value="juventus">Juventus FC</option>
+                </select>
+                <span class="validation-msg" id="club-validation">Debes seleccionar un club.</span>
+              </div>
+              
+              <!-- Campo 4: Lema del Fan -->
+              <div class="form-group">
+                <label for="fan-slogan" class="form-label">Lema o Mensaje de Aliento</label>
+                <textarea id="fan-slogan" class="form-input" rows="4" placeholder="Ej. ¡Hala Madrid y nada más! / ¡You'll never walk alone! (Mínimo 10 caracteres)" required></textarea>
+                <span class="validation-msg" id="slogan-validation">El mensaje de aliento debe tener al menos 10 caracteres.</span>
+              </div>
+              
+              <!-- Boton de Envio -->
+              <button type="submit" class="btn form-submit-btn">Completar Registro</button>
+            </form>
+          </div>
+
+          <!-- REGISTRO DE AFICIONADOS DENTRO DE LA PAGINA -->
+          <div class="registrations-card">
+            <div class="registrations-header">
+              <h2 class="registrations-title">Aficionados Registrados</h2>
+              <button id="export-json" class="export-btn">
+                <span>📥</span> Guardar en JSON
+              </button>
+            </div>
+            
+            <div class="registrations-list" id="registrations-list">
+              <!-- Los registros de hinchas se añadiran dinámicamente con JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PAGINA -->
+  <footer>
+    <div class="container">
+      <div class="footer-layout">
+        <div class="footer-brand">
+          <div class="footer-logo">UCL <span>Fanzone</span></div>
+          <p class="footer-desc">Una plataforma interactiva independiente diseñada para aficionados del mejor futbol de Europa. Todos los derechos del logo oficial pertenecen a la UEFA.</p>
+        </div>
+        
+        <nav class="footer-nav" aria-label="Navegación del Pie de Pagina">
+          <div class="footer-nav-col">
+            <h4>Navegación</h4>
+            <ul>
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="equipos.html">Equipos Histaricos</a></li>
+              <li><a href="registro.html">Unirse al Club</a></li>
+            </ul>
+          </div>
+          <div class="footer-nav-col">
+            <h4>Enlaces de Interes</h4>
+            <ul>
+              <li><a href="https://es.uefa.com/uefachampionsleague/" target="_blank" rel="noopener">Sitio Oficial UEFA</a></li>
+              <li><a href="https://gaming.uefa.com/es/uclfantasy" target="_blank" rel="noopener">UCL Fantasy</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2026 UCL Fanzone. Desarrollado con pasion futbolística en HTML5/CSS/JS, Por Sandy Jr Perez Mendoza.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-link" aria-label="Twitter de UCL Fanzone">🐦</a>
+          <a href="#" class="social-link" aria-label="Instagram de UCL Fanzone">📸</a>
+          <a href="#" class="social-link" aria-label="YouTube de UCL Fanzone">📺</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

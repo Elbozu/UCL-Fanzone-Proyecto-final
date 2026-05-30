@@ -42,8 +42,7 @@ El código está organizado de la siguiente manera:
 │   └── app.js          # Lógica de JavaScript (Trivia, filtros, modal, formulario y JSON)
 └── images/
     └── logo.svg        # Logotipo del sitio en formato vectorial
-
----
+```
 
 ## 🔧 Instalación y Vista Local
 
@@ -55,10 +54,11 @@ Asegúrate de mantener la estructura de carpetas (css/, js/, e images/).
 
 Abre el archivo index.html en cualquier navegador web moderno (Chrome, Edge, Firefox, Safari).
 
-Nota: Para una mejor experiencia de desarrollo y asegurar que algunas rutas relativas funcionen a la perfección, se recomienda abrir el proyecto utilizando la extensión Live Server en Visual Studio Code o cualquier servidor web local.
+💡 Nota: Para una mejor experiencia de desarrollo y asegurar que algunas rutas relativas funcionen a la perfección, se recomienda abrir el proyecto utilizando la extensión Live Server en Visual Studio Code o cualquier servidor web local.
 
 ## 📜 Créditos y Derechos
 
 Desarrollador: Desarrollado con pasión futbolística por Sandy Jr Perez Mendoza (2026).
 
-Aviso Legal: Esta es una plataforma independiente con fines educativos y de entretenimiento. Todos los derechos del logo oficial y marcas registradas pertenecen a la UEFA.
+## Aviso Legal: Esta es una plataforma independiente con fines educativos y de entretenimiento. Todos los derechos del logo oficial y marcas registradas pertenecen a la UEFA.
+

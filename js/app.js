@@ -2,7 +2,7 @@
  * Script Principal de la Web de la Fan Page UEFA Champions League
  * Organizado por secciones: Estado Global, Funciones de Utilidad, Inicializacion de Paginas, Escuchadores de Eventos
  */
-/* /^[^\s@]+@[^\s@]+\.[^\s@]+$/ seria: Texto_sin_arroba_ni_espacios + @ + Texto_sin_arroba_ni_espacios + . + Texto_sin_arroba_ni_espacios.*/
+
 // ==========================================================================
 // 1. ESTADO GLOBAL Y CONSTANTES
 // ==========================================================================
@@ -142,6 +142,7 @@ const CLAVE_LOCAL_STORAGE = 'ucl_registros_aficionados';
  * @returns {boolean} - Verdadero si es válido, falso de lo contrario
  */
 function validateEmail(correo) {
+  /* /^[^\s@]+@[^\s@]+\.[^\s@]+$/ seria: Texto_sin_arroba_ni_espacios + @ + Texto_sin_arroba_ni_espacios + . + Texto_sin_arroba_ni_espacios.*/
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Aquí se crea una Expresión Regular (Regex), que es como una plantilla o molde para buscar patrones de texto.
   return emailRegex.test(correo); // Devuelve true o false, si el correo cumple con la estructura de un correo o no
 }
@@ -219,6 +220,7 @@ function eliminarNotificacion(notificacion) {
 // 3. LÓGICA PRINCIPAL / INICIALIZACIÓN DE LA PÁGINA
 // ==========================================================================
 
+// Esto evita que JavaScript intente acceder a elementos que todavía no existen. el evento se dispara cuando carga todo el html
 document.addEventListener('DOMContentLoaded', () => {
   // Configuración del resaltado de navegación activa
   configurarNavegacion();
@@ -252,6 +254,7 @@ function configurarNavegacion() {
   
   enlacesNav.forEach(enlace => {
     const href = enlace.getAttribute('href');
+    // Verificar si coincide con la página actual
     if (rutaActual.endsWith(href) || (rutaActual.endsWith('/') && href === 'index.html')) {
       enlace.classList.add('active');
     } else {
@@ -281,6 +284,9 @@ function configurarNavegacion() {
 // 4. PÁGINA DE INICIO: LÓGICA DE LA TRIVIA (Eventos y manipulación del DOM)
 // ==========================================================================
 
+// Inicializa el quiz estableciendo los valores iniciales,
+// mostrando la primera pregunta y configurando el botón
+// para avanzar entre preguntas o mostrar el resultado final.
 function inicializarQuiz() {
   indiceQuizActual = 0;
   puntajeQuiz = 0;
@@ -299,6 +305,9 @@ function inicializarQuiz() {
   }
 }
 
+// Muestra la pregunta actual en pantalla, actualiza el marcador,
+// genera dinamicamente las opciones de respuesta y asigna
+// los eventos necesarios para procesar la selección del usuario.
 function renderizarPreguntaQuiz() {
   quizRespondido = false;
   const datosPregunta = DATOS_TRIVIA[indiceQuizActual];
@@ -311,13 +320,17 @@ function renderizarPreguntaQuiz() {
   if (!elementoPregunta || !elementoOpciones) return;
 
   elementoPregunta.textContent = datosPregunta.question;
-  elementoOpciones.innerHTML = ''; // Limpiar las opciones anteriores
+
+   // Limpiar las opciones anteriores
+  elementoOpciones.innerHTML = ''; 
   botonSiguiente.style.display = 'none';
 
+  // Actualiza la informacion de progreso y puntaje
   if (elementoTextoPuntaje) {
     elementoTextoPuntaje.innerHTML = `Pregunta: <span>${indiceQuizActual + 1}/${DATOS_TRIVIA.length}</span> | Puntos: <span>${puntajeQuiz}</span>`;
   }
 
+  // Genera un boton para cada opcion
   datosPregunta.options.forEach((opcion, indice) => {
     const boton = document.createElement('button');
     boton.className = 'quiz-option';
@@ -333,17 +346,22 @@ function renderizarPreguntaQuiz() {
   });
 }
 
+// Evalua la respuesta seleccionada por el usuario,
+// actualiza el puntaje, resalta la respuesta correcta
+// e incorrecta y muestra una notificación de feedback.
 function procesarRespuestaQuiz(indiceSeleccionado, botonSeleccionado) {
   quizRespondido = true;
   const datosPregunta = DATOS_TRIVIA[indiceQuizActual];
   const botonSiguiente = document.getElementById('quiz-next-btn');
   const opciones = document.querySelectorAll('.quiz-option');
 
+   // Si respondiste bien
   if (indiceSeleccionado === datosPregunta.correctIndex) {
     botonSeleccionado.classList.add('correct');
     puntajeQuiz += 10;
     showNotification('¡Correcto! +10 puntos', 'success');
-  } else {
+  } // Si respondiste mal
+  else {
     botonSeleccionado.classList.add('wrong');
     opciones[datosPregunta.correctIndex].classList.add('correct'); // Resaltar la respuesta correcta
     showNotification('Incorrecto. La respuesta correcta está resaltada.', 'error');
@@ -362,6 +380,9 @@ function procesarRespuestaQuiz(indiceSeleccionado, botonSeleccionado) {
   }
 }
 
+// Muestra la pantalla final del quiz con la puntuación obtenida,
+// genera un mensaje personalizado según el rendimiento del usuario
+// y permite reiniciar la trivia.
 function renderizarResultadosQuiz() {
   const contenedor = document.getElementById('quiz-wrapper');
   if (!contenedor) return;
@@ -376,6 +397,7 @@ function renderizarResultadosQuiz() {
     mensajeResumen = 'Sigue practicando, la Champions League es para los mejores.';
   }
 
+  // Reemplazar el contenido del quiz por la pantalla de resultados
   contenedor.innerHTML = `
     <span class="quiz-badge">Resultados</span>
     <h3 class="quiz-question" style="font-size: 1.8rem; margin-top:20px;">¡Trivia Completada!</h3>
@@ -388,6 +410,7 @@ function renderizarResultadosQuiz() {
     <button id="quiz-restart-btn" class="btn btn-primary" style="display: block; width: 100%;">Intentar de nuevo</button>
   `;
 
+  // Reiniciar la trivia recargando la página
   document.getElementById('quiz-restart-btn').addEventListener('click', () => {
     // Recargar la página para reiniciar los valores de la trivia
     location.reload();
@@ -395,9 +418,11 @@ function renderizarResultadosQuiz() {
 }
 
 // ==========================================================================
-// 5. PÁGINA DE EQUIPOS: RENDERIZADO, FILTRADO Y MODAL DE DETALLES
+// 5. PAGINA DE EQUIPOS: RENDERIZADO, FILTRADO Y MODAL DE DETALLES
 // ==========================================================================
 
+// Inicializa la página de equipos configurando el renderizado inicial,
+// la búsqueda, los filtros por categoría y los eventos del modal.
 function inicializarPaginaEquipos() {
   const contenedor = document.getElementById('contenedor-equipos');
   const buscadorInput = document.getElementById('team-search');
@@ -423,7 +448,7 @@ function inicializarPaginaEquipos() {
     });
   }
 
-  // Escuchador de clics en los botones de filtrado (Evento 1 - click)
+  // Escuchador de clics en los botones de filtrado, filtra por pais/categoria (Evento 1 - click)
   botonesFiltro.forEach(btn => {
     btn.addEventListener('click', () => {
       botonesFiltro.forEach(b => b.classList.remove('active'));
@@ -458,10 +483,13 @@ function inicializarPaginaEquipos() {
   }
 }
 
+// Genera dinámicamente las tarjetas de los clubes y las muestra
+// en pantalla según los filtros o búsquedas aplicados.
 function renderizarEquipos(equipos) {
   const contenedor = document.getElementById('contenedor-equipos');
   if (!contenedor) return;
 
+   // Mostrar mensaje cuando no existen resultados
   if (equipos.length === 0) {
     contenedor.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 40px 0;">
@@ -479,7 +507,7 @@ function renderizarEquipos(equipos) {
     tarjeta.className = 'team-card';
     tarjeta.dataset.id = club.id;
 
-    // Llamada a la función getClubStars que tiene parámetros e indica retorno
+    // Llamada a la funcion getClubStars que tiene la representacion visual de los titulos del club
     const estrellasHtml = getClubStars(club.titles);
 
     tarjeta.innerHTML = `
@@ -500,11 +528,13 @@ function renderizarEquipos(equipos) {
   });
 }
 
+// Carga la información del club seleccionado en el modal
+// y lo muestra al usuario.
 function abrirModalClub(club) {
   const capaModal = document.getElementById('modal-overlay');
   if (!capaModal) return;
 
-  // Insertar datos dinámicamente en el modal
+  // Insertar datos dinamicamente en el modal
   document.getElementById('modal-logo').src = club.logo;
   document.getElementById('modal-logo').alt = `Escudo de ${club.name}`;
   document.getElementById('modal-title').textContent = club.name;
@@ -521,7 +551,9 @@ function abrirModalClub(club) {
 // 6. PAGINA DE REGISTRO: VALIDACION DE FORMULARIO Y ALMACENAMIENTO JSON (Eventos y DOM)
 // ==========================================================================
 
+// Configura el formulario de registro de aficionados
 function inicializarPaginaRegistro() {
+   // Obtener los datos del formulario
   const formulario = document.getElementById('formulario-registro');
   const inputNombre = document.getElementById('fan-name');
   const inputCorreo = document.getElementById('fan-email');
@@ -529,6 +561,7 @@ function inicializarPaginaRegistro() {
   const inputLema = document.getElementById('fan-slogan');
   const botonExportar = document.getElementById('export-json');
 
+   // Salir si el formulario no existe
   if (!formulario) return;
 
   // Renderizar la lista inicial de registros guardados
@@ -566,6 +599,7 @@ function inicializarPaginaRegistro() {
         date: new Date().toLocaleDateString()
       };
 
+      // Guardar el registro y limpiar el formulario
       guardarRegistro(nuevoAficionado);
       showNotification('¡Registro completado! Te has unido al club de fans.', 'success');
       
@@ -594,7 +628,7 @@ function inicializarPaginaRegistro() {
   }
 }
 
-// Aplica clases CSS correspondientes a la validación de un campo
+// Aplica clases CSS correspondientes a la validación de un campo o Muestra visualmente si un campo es válido o no
 function validarCampo(elementoInput, esValido) {
   const elementoMensaje = elementoInput.nextElementSibling;
   
@@ -641,6 +675,8 @@ function renderizarRegistros() {
 
   lista.innerHTML = ''; // Limpiar la lista anterior
 
+
+  // Crear una tarjeta para cada aficionado
   registros.forEach(aficionado => {
     const item = document.createElement('div');
     item.className = 'registration-item';
@@ -650,6 +686,7 @@ function renderizarRegistros() {
     const clubSeleccionado = DATOS_CLUBES.find(c => c.id === aficionado.club);
     const nombreClub = clubSeleccionado ? clubSeleccionado.name : aficionado.club;
 
+   
     item.innerHTML = `
       <div class="reg-name">${aficionado.name}</div>
       <div class="reg-club">Aficionado del ${nombreClub}</div>
